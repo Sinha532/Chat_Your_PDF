@@ -7,7 +7,7 @@ This project is a Generative AI-powered web application that prioritizes the Ret
 - **Generative AI Model**: Utilizes Google's `gemini-1.5-flash` model for accurate and context-aware responses.
 - **RAG Pipeline**: Combines retrieval and generation capabilities to provide precise answers based on provided documents.
 - **Custom Knowledge Integration**: Users can upload custom documents (PDFs) that the AI will use to generate responses.
-- **Web Application**: A user-friendly web interface built with Django and Streamlit.
+- **Web Application**: A user-friendly web interface built with Django.
 - **Authentication**: Customized user authentication for secure access.
 - **Message Retrieval**: Users can retrieve previous interactions and answers.
 
