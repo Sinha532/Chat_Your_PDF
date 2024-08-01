@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with your PDF</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet" >
+     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">Question & Summary your PDF</h1>
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    <h2 class="card-title">Upload PDF</h2>
+                    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="pdf" class="custom-file-upload">
+                              <i class="fas fa-upload"></i> select file
+                            </label>
+                            <input type="file" id="pdf" class="custom-file-input" name="pdf" required>
+                          </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                    {% if messages %}
+                      <ul>
+                        {% for message in messages %}
+                          <li>{{ message }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    <br>
+                    <a href="{% url 'logout' %}" class="btn btn-secondary">Log Out</a>
+                {% else %}
+                    <h2>Please log in to upload a PDF and ask questions.</h2>
+                    <br>
+                    <a href="{% url 'signup' %}" class="btn btn-success">Sign Up</a>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('pdf').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            var label = document.querySelector('.custom-file-upload');
+            label.innerHTML = '<i class="fas fa-upload"></i> ' + fileName;
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-5">Create an Account, Build an Conversation</h1>
+        <h2 class="mb-4">Sign Up</h2>
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="." class="login-form" id="signup-form">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <img class="input-icon" src="{% static 'icons/profile-user.svg' %}" alt="">
+                        {{ form.username}}
+                    </div>
+                    <div class="input-group">
+                        <img class="input-icon" src="{% static 'icons/envelope.png' %}" alt="">
+                        {{ form.email }}
+                    </div>
+                    <div class="input-group">
+                        <img class="input-icon" src="{% static 'icons/key.svg' %}" alt="">
+                        {{ form.password1}}
+                    </div>
+                    <div class="input-group">
+                        <img class="input-icon" src="{% static 'icons/key.svg' %}" alt="">
+                        {{ form.password2}}
+                    </div>
+                    <input type="submit" class="submit btn-block" value="Sign Up">
+                </form>
+                <p class="mt-3">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

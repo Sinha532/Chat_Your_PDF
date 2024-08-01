@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Answering</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .center {
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function toggleDocumentSimilarity() {
+            var x = document.getElementById("document-similarity");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Let's Discuss Here,Ask a Question</h1>
+        <h5 class="text-center my-4">Enter a Question and Click Get Answer to begin</h5>
+        <form action="{% url 'result' %}" method="post" class="center">
+            {% csrf_token %}
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-8">
+                    <input type="text" name="question" class="form-control" placeholder="Ask Something...." required>
+                </div>
+                <div class="col-sm-2 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-primary btn-block">Get Answer</button>
+                </div>
+            </div>
+        </form>
+        <div class="container text-center mt-5">
+            <a href="{% url 'logout' %}" class="btn btn-secondary mx-auto">Log Out</a>
+        </div>
+        {% if answer %}
+            <div class="mt-5">
+                <h2 class="text-center">what I say is...</h2>
+                <p class="text-center">{{ answer }}</p>
+                <div class="text-center">
+                    <button class="btn btn-custom" onclick="toggleDocumentSimilarity()">Referal Docs</button>
+                </div>
+                <div id="document-similarity" class="mt-4" style="display: none;">
+                    <h2 class="text-center">Document Similarity Search:</h2>
+                    {% for doc in documents %}
+                        <div class="card my-3">
+                            <div class="card-body">
+                                <p class="card-text">{{ doc.page_content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <!-- footer-->
+    <footer class="footer">
+        <div class="container text-center">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h5>Contact Us</h5>
+                  <p>
+                    📧lokeshSinha746@gmail.com
+                  </p>
+                </div>
+                <div class="col-md-4 text-center">
+                  <h5>Follow Us</h5>
+                  <div class="social-icons">
+                    <a href="https://github.com/Sinha532" target="_blank" class="fab fa-github"></a>
+                    <a href="https://www.instagram.com/urs_sinha_?igsh=b3k2b3dhanV2YzUy" target="_blank" class="fab fa-instagram"></a>
+                    <a href="https://www.linkedin.com/in/lokesh-sinha-n-952706246/" target="_blank" class="fab fa-linkedin-in"></a>
+                  </div>
+                </div>
+                <div class="col-md-4 text-right">
+                  <h5>About Us</h5>
+                  <p>
+                    Lokesh Sinha N,BTech,<br>
+                    Aspiring Python Developer,<br>
+                    Love working with Python!<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
