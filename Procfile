@@ -1,1 +1,1 @@
-web gunicorn chat_pdf.wsgi:application --log-file -
+web: gunicorn chat_pdf.wsgi
